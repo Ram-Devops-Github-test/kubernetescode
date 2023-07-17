@@ -19,7 +19,9 @@ pipeline{
         stage('Build') { 
             steps { 
                 script{
-                 app = docker.build("underwater")
+                    echo 'Starting to build docker image'
+                    
+                 def app = docker.build("my-image:${env.BUILD_ID}")
                 }
             }
         }
