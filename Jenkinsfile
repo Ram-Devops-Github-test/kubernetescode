@@ -1,6 +1,4 @@
-
-pipeline {
-    agent any
+node {
     def app
 
     stage('Clone repository') {
@@ -9,7 +7,10 @@ pipeline {
         checkout scm
     }
 
-    
+    stage('Build image') {
+  
+       app = docker.build("ramurajula/dockerhubrepo1")
+    }
 
     stage('Test image') {
   
@@ -21,9 +22,9 @@ pipeline {
 
     stage('Push image') {
         
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhubkey') {
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             app.push("${env.BUILD_NUMBER}")
         }
     }
-     
+    
 }
