@@ -1,12 +1,7 @@
-FROM jenkins/jenkins:lts
-MAINTAINER madhusudan reddy
-USER root
-RUN apt-get -y update; apt-get install -y sudo; apt-get install -y git wget
-RUN echo "Jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
-RUN wget http://get.docker.com/builds/Linux/x86_64/docker-latest.tgz
-RUN tar -xvzf docker-latest.tgz
-RUN mv docker/* /usr/bin/
-USER Jenkins
+RUN curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz \
+  && tar xzvf docker-17.04.0-ce.tgz \
+  && mv docker/docker /usr/local/bin \
+  && rm -r docker docker-17.04.0-ce.tgz
 
 
 FROM python:3.8-alpine
