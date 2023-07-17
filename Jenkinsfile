@@ -6,11 +6,12 @@ pipeline{
         registry = "ramurajula/dockerhubrepo1"
         registryCredential = 'dockerhubkey'        
     }
-     stage('Initialize'){
+     
+    stages{
+        stage('Initialize'){
         def dockerHome = tool 'myDocker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
     }
-    stages{
         stage('Clone repository') { 
             steps { 
                 script{
