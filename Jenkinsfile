@@ -1,7 +1,7 @@
+
 pipeline {
     agent any
-
-     def app
+    def app
 
     stage('Clone repository') {
       
@@ -9,10 +9,7 @@ pipeline {
         checkout scm
     }
 
-    stage('Build image') {
-  
-       app = docker.build("raj80dockerid/test")
-    }
+    
 
     stage('Test image') {
   
@@ -24,9 +21,9 @@ pipeline {
 
     stage('Push image') {
         
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhubkey') {
             app.push("${env.BUILD_NUMBER}")
         }
     }
-    
+     
 }
