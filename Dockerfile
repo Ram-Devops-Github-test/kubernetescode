@@ -5,14 +5,4 @@ RUN curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz
   && rm -r docker docker-17.04.0-ce.tgz
 
 
-FROM python:3.8-alpine
 
-RUN mkdir /app
-
-ADD . /app
-
-WORKDIR /app
-
-RUN pip install -r requirements.txt
-
-CMD ["python", "app.py"]
