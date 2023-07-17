@@ -7,10 +7,7 @@ node {
         checkout scm
     }
 
-    stage('Build image') {
-  
-       app = docker.build("ramurajula/dockerhubrepo1")
-    }
+    
 
     stage('Test image') {
   
@@ -23,6 +20,7 @@ node {
     stage('Push image') {
         
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhubkey') {
+            app = docker.build("ramurajula/dockerhubrepo1")
             app.push("${env.BUILD_NUMBER}")
         }
     }
