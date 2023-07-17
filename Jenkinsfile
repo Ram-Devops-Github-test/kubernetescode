@@ -9,7 +9,7 @@ node {
 
     stage('Build image') {
   
-       app = docker.build("ramurajula/dockerhubrepo1t")
+       app = docker.build("ramurajula/dockerhubrepo1")
     }
 
     stage('Test image') {
