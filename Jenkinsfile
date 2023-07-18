@@ -1,32 +1,12 @@
-pipeline{
-    agent any
-    
-    environment{
-        
-        registry = "ramurajula/dockerhubrepo1"
-        registryCredential = 'dockerhubkey'        
+pipeline {
+    agent {
+        docker { image 'node:18.16.0-alpine' }
     }
-     
-    stages{
-        
-        stage('Clone repository') { 
-            steps { 
-                script{
-                checkout scm
-                }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
             }
         }
-
-        stage('Build') { 
-            steps { 
-                script{
-                    echo 'Starting to build docker image'
-                    
-                 def app = docker.build("my-image:${env.BUILD_ID}")
-                }
-            }
-        }
-      
-      
-}
+    }
 }
